@@ -15,3 +15,20 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+function checkMicropostForm(){
+  var post_length = $('#micropost_form').val().length;
+  console.log("post_length is: " + post_length);
+  var submit_button = $('#Submit_micropost_button');
+  if(post_length > 0 || post_length <= 140) {
+    submit_button.attr('disabled', false)
+  }
+  if(post_length == 0 || post_length > 140){
+    submit_button.attr('disabled', true)
+  }
+}
+
+$( document ).on( 'turbolinks:load', function() {
+  $('#micropost_form').on("change keyup paste", checkMicropostForm);
+    checkMicropostForm();
+});
